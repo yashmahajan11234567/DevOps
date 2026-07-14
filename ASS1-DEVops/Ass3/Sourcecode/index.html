@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yash E-commerce | Premium Online Shopping</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- WEBSITE HEADER -->
+<header id="siteHeader">
+  <h1>Yash E-commerce</h1>
+  <p>Premium Online Shopping Experience</p>
+</header>
+
+<!-- LOGIN -->
+<section id="login">
+  <h2>Welcome Back</h2>
+  <input id="username" placeholder="Username" autocomplete="off">
+  <input id="password" type="password" placeholder="Password" autocomplete="off">
+  <button onclick="login()">Login</button>
+  <p id="loginMsg"></p>
+</section>
+
+<!-- HOME / PRODUCTS -->
+<section id="home">
+  <h2>Featured Products</h2>
+
+  <div class="products">
+
+    <div class="card">
+      <img src="Laptop.png" alt="Laptop">
+      <div class="info">
+        <h3>Laptop</h3>
+        <p>₹50,000</p>
+      </div>
+      <button onclick="addToCart('Laptop',50000)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <img src="headphone.png" alt="Headphones">
+      <div class="info">
+        <h3>Headphones</h3>
+        <p>₹2,000</p>
+      </div>
+      <button onclick="addToCart('Headphones',2000)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <img src="iphone.png" alt="Mobile">
+      <div class="info">
+        <h3>Mobile Phone</h3>
+        <p>₹30,000</p>
+      </div>
+      <button onclick="addToCart('Mobile Phone',30000)">Add to Cart</button>
+    </div>
+
+  </div>
+
+  <button onclick="showCart()" style="width: 100%; max-width: 300px; margin: 30px auto; display: block;">Go to Cart</button>
+</section>
+
+<!-- CART -->
+<section id="cart">
+  <h2>Shopping Cart</h2>
+  <ul id="cartItems"></ul>
+  <h3 id="totalPrice"></h3>
+  <button onclick="checkout()" style="width: 100%; max-width: 300px; margin: 30px auto; display: block;">Proceed to Checkout</button>
+</section>
+
+<!-- CHECKOUT -->
+<section id="checkout">
+  <h2>Checkout Details</h2>
+  <input placeholder="Full Name" id="checkoutName">
+  <input placeholder="Delivery Address" id="checkoutAddress">
+  <button onclick="placeOrder()" style="width: 100%; max-width: 300px; margin: 30px auto; display: block;">Place Order</button>
+</section>
+
+<!-- BILL -->
+<section id="bill">
+  <h2>Order Confirmation</h2>
+  <p id="billAmount"></p>
+  <p style="margin-top: 20px; font-size: 18px; color: #7dd3fc;">Thank you for shopping with us!</p>
+  <button onclick="showSection('home')" style="width: 100%; max-width: 300px; margin: 30px auto; display: block;">Continue Shopping</button>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

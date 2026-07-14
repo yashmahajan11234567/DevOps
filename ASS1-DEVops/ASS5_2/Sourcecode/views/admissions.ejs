@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admissions | <%= site.collegeName %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('partials/header', { site }) %>
+  <main class="page">
+    <section class="page-hero">
+      <p class="eyebrow">Apply now</p>
+      <h1>Admissions inquiry</h1>
+      <p>Submit your applicant details, academic marks, and entrance exam scores. The data is stored in MongoDB when the database is connected.</p>
+      <% if (submitted) { %>
+        <div class="notice success">Your inquiry was submitted successfully.</div>
+      <% } %>
+      <div class="hero-actions">
+        <button class="btn primary" type="button" data-open-modal>Open applicant popup</button>
+      </div>
+    </section>
+    <section class="form-card">
+      <p class="section-note">The same applicant form is available as a popup for faster submissions.</p>
+    </section>
+  </main>
+  <%- include('partials/application-modal', { site, openModal }) %>
+  <%- include('partials/footer') %>
+</body>
+</html>

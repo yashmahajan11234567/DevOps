@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faculty | <%= site.collegeName %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('partials/header', { site }) %>
+  <main class="page">
+    <section class="page-hero">
+      <p class="eyebrow">Faculty directory</p>
+      <h1>Experienced educators and student mentors</h1>
+      <p>Faculty profiles are kept simple and readable, similar to a university information page.</p>
+    </section>
+    <section class="people-grid">
+      <% site.faculty.forEach((person) => { %>
+        <article class="person card">
+          <h3><%= person.name %></h3>
+          <p><%= person.role %></p>
+          <span><%= person.focus %></span>
+        </article>
+      <% }) %>
+    </section>
+  </main>
+  <%- include('partials/footer') %>
+</body>
+</html>

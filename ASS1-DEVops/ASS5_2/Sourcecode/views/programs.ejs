@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programs | <%= site.collegeName %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('partials/header', { site }) %>
+  <main class="page">
+    <section class="page-hero">
+      <p class="eyebrow">Academic offerings</p>
+      <h1>Programs designed for employability and growth</h1>
+      <p>Inspired by academic program pages, this section keeps the focus on clear program details.</p>
+    </section>
+    <section class="cards">
+      <% site.programs.forEach((program) => { %>
+        <article class="card">
+          <p class="card-meta"><%= program.level %> | <%= program.duration %></p>
+          <h3><%= program.name %></h3>
+          <p><%= program.summary %></p>
+        </article>
+      <% }) %>
+    </section>
+  </main>
+  <%- include('partials/footer') %>
+</body>
+</html>

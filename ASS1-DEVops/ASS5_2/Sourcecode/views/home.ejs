@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= site.collegeName %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('partials/header', { site }) %>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Admissions Open 2026</p>
+        <h1><%= site.collegeName %></h1>
+        <p class="lead"><%= site.tagline %></p>
+        <p><%= site.description %></p>
+        <div class="hero-actions">
+          <button class="btn primary" type="button" data-open-modal>Apply Now</button>
+          <a class="btn secondary" href="/programs">Explore Programs</a>
+        </div>
+      </div>
+      <aside class="hero-panel">
+        <h2>Why students choose us</h2>
+        <ul>
+          <% site.highlights.forEach((item) => { %>
+            <li><%= item %></li>
+          <% }) %>
+        </ul>
+        <div class="mini-stat">
+          <span><%= applicationsCount %></span>
+          <p>applications received through the website</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Applicant Intake</h2>
+        <a href="/admissions">Open full admissions page</a>
+      </div>
+      <p class="section-note">Use the popup to capture applicant details quickly, including marks and entrance exam scores.</p>
+    </section>
+
+    <section class="stats">
+      <% site.stats.forEach((stat) => { %>
+        <article>
+          <strong><%= stat.value %></strong>
+          <span><%= stat.label %></span>
+        </article>
+      <% }) %>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Featured Programs</h2>
+        <a href="/programs">View all programs</a>
+      </div>
+      <div class="cards">
+        <% site.programs.forEach((program) => { %>
+          <article class="card">
+            <p class="card-meta"><%= program.level %> | <%= program.duration %></p>
+            <h3><%= program.name %></h3>
+            <p><%= program.summary %></p>
+          </article>
+        <% }) %>
+      </div>
+    </section>
+
+    <section class="section split">
+      <article class="panel">
+        <h2>Academic leadership</h2>
+        <div class="people">
+          <% site.faculty.forEach((person) => { %>
+            <div class="person">
+              <h3><%= person.name %></h3>
+              <p><%= person.role %></p>
+              <span><%= person.focus %></span>
+            </div>
+          <% }) %>
+        </div>
+      </article>
+      <article class="panel accent">
+        <h2>Upcoming events</h2>
+        <% site.events.forEach((event) => { %>
+          <div class="event">
+            <p><%= event.date %></p>
+            <h3><%= event.title %></h3>
+            <span><%= event.note %></span>
+          </div>
+        <% }) %>
+      </article>
+    </section>
+  </main>
+
+  <%- include('partials/application-modal', { site, openModal }) %>
+  <%- include('partials/footer') %>
+</body>
+</html>

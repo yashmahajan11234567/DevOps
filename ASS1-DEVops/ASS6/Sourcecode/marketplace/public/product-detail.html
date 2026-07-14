@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listing Details - Marketplace</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo"><a href="/">Marketplace</a></div>
+      <ul class="nav-menu" id="navMenu">
+        <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+        <li class="nav-item" id="addProductNav" style="display: none;"><a href="/add-product.html" class="nav-link">Add Listing</a></li>
+        <li class="nav-item" id="authNav"><a href="/login.html" class="nav-link">Login/Register</a></li>
+        <li class="nav-item" id="logoutNav" style="display: none;"><a href="#" class="nav-link" onclick="logout(event)">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      <a href="/" class="btn btn-link">&larr; Back to Home</a>
+
+      <div id="loading" class="loading">Loading listing details...</div>
+
+      <div id="productDetail" class="product-detail" style="display: none;">
+        <div class="product-image-container">
+          <img id="productImage" src="" alt="" class="product-image">
+        </div>
+
+        <div class="product-info">
+          <h1 id="productTitle"></h1>
+          <div class="product-price"><span class="price" id="productPrice"></span></div>
+
+          <div class="product-seller"><p><strong>Seller:</strong> <span id="productSeller"></span></p></div>
+          <div class="product-meta" id="productMeta"></div>
+
+          <div class="product-description">
+            <h3>Description</h3>
+            <p id="productDescription"></p>
+          </div>
+
+          <div class="product-date"><p><small>Listed on: <span id="productDate"></span></small></p></div>
+
+          <div class="product-actions" id="productActions">
+            <button class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
+          </div>
+
+          <div class="delete-button" id="deleteButton" style="display: none;">
+            <button class="btn btn-danger" onclick="deleteProduct()">Delete Listing</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="error" class="alert alert-danger" style="display: none;"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Used Vehicle Marketplace.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    let currentProductId = null;
+    let currentUserId = null;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await checkAuthStatus();
+      currentUserId = localStorage.getItem('userId');
+
+      if (!productId) {
+        document.getElementById('error').textContent = 'Listing ID not specified';
+        document.getElementById('error').style.display = 'block';
+        document.getElementById('loading').style.display = 'none';
+        return;
+      }
+
+      await loadProductDetail();
+    });
+
+    async function loadProductDetail() {
+      try {
+        const response = await fetch(`/api/products/${productId}`);
+        if (!response.ok) throw new Error('Failed to load listing');
+
+        const product = await response.json();
+        currentProductId = product._id;
+
+        document.getElementById('productTitle').textContent = product.title;
+        document.getElementById('productPrice').textContent = `INR ${Number(product.price).toLocaleString('en-IN')}`;
+        document.getElementById('productSeller').textContent = product.username;
+        document.getElementById('productDescription').textContent = product.description;
+        document.getElementById('productImage').src = product.imageUrl;
+        document.getElementById('productImage').alt = product.title;
+
+        const meta = [];
+        if (product.category) meta.push(`Category: ${product.category}`);
+        if (product.brand || product.model) meta.push(`Vehicle: ${product.brand || ''} ${product.model || ''}`.trim());
+        if (product.year) meta.push(`Year: ${product.year}`);
+        if (product.kilometersDriven !== undefined && product.kilometersDriven !== null) meta.push(`Km Driven: ${Number(product.kilometersDriven).toLocaleString('en-IN')}`);
+        if (product.fuelType) meta.push(`Fuel: ${product.fuelType}`);
+        if (product.location) meta.push(`Location: ${product.location}`);
+        document.getElementById('productMeta').innerHTML = meta.map(item => `<p>${item}</p>`).join('');
+
+        const date = new Date(product.createdAt).toLocaleDateString();
+        document.getElementById('productDate').textContent = date;
+
+        const ownerId = typeof product.userId === 'object' && product.userId !== null ? product.userId._id : product.userId;
+        if (currentUserId && ownerId && ownerId.toString() === currentUserId.toString()) {
+          document.getElementById('deleteButton').style.display = 'block';
+        }
+
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('productDetail').style.display = 'block';
+      } catch (error) {
+        console.error('Error loading listing:', error);
+        document.getElementById('error').textContent = 'Failed to load listing details';
+        document.getElementById('error').style.display = 'block';
+        document.getElementById('loading').style.display = 'none';
+      }
+    }
+
+    async function deleteProduct() {
+      if (!confirm('Are you sure you want to delete this listing?')) return;
+
+      try {
+        const response = await fetch(`/api/products/${currentProductId}`, { method: 'DELETE' });
+        if (response.ok) {
+          alert('Listing deleted successfully');
+          window.location.href = '/';
+        } else {
+          const data = await response.json();
+          alert(data.error || 'Failed to delete listing');
+        }
+      } catch (error) {
+        console.error('Error deleting listing:', error);
+        alert('An error occurred while deleting the listing');
+      }
+    }
+
+    function addToCart() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const productTitle = document.getElementById('productTitle').textContent;
+      const productPrice = Number((document.getElementById('productPrice').textContent || '').replace(/[^0-9.]/g, ''));
+      const productSeller = document.getElementById('productSeller').textContent;
+
+      const cartItem = {
+        id: currentProductId,
+        title: productTitle,
+        price: productPrice,
+        seller: productSeller,
+        quantity: 1,
+        addedAt: new Date().toISOString()
+      };
+
+      const existingItem = cart.find(item => item.id === currentProductId);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push(cartItem);
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`"${productTitle}" added to cart.`);
+    }
+  </script>
+</body>
+</html>

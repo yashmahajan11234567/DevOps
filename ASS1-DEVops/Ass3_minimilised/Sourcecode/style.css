@@ -1,0 +1,19 @@
+* { margin: 0; padding: 0; }
+body { font-family: Arial; background: #f5f5f5; color: #333; padding: 20px; }
+section { display: none; max-width: 600px; margin: 0 auto; background: #ffffff; padding: 20px; border: 2px solid #2a7fff; }
+section.active { display: block; }
+h2 { margin-bottom: 15px; color: #2a7fff; font-size: 20px; }
+input { width: 100%; padding: 10px; margin: 8px 0; background: #f9f9f9; color: #333; border: 2px solid #ddd; font-size: 14px; }
+button { width: 100%; padding: 10px; margin: 5px 0; background: #2a7fff; color: white; border: none; cursor: pointer; font-weight: bold; border-radius: 3px; }
+button:hover { background: #1a5fdd; }
+#prods { margin: 15px 0; }
+#prods div { padding: 12px; margin: 8px 0; background: #2a2a2a; border-left: 4px solid #2a7fff; color: #fff; }
+#prods img { width: 100px; height: 100px; margin-bottom: 8px; }
+#prods b { color: #2a7fff; }
+#items { list-style: none; }
+#items li { padding: 10px; margin: 8px 0; background: #2a2a2a; border-left: 4px solid #2a7fff; color: #fff; display: flex; justify-content: space-between; align-items: center; }
+#total { padding: 12px; margin: 15px 0; background: #2a2a2a; font-weight: bold; color: #2a7fff; font-size: 16px; border: 2px solid #2a7fff; }
+.nav { display: flex; gap: 10px; margin-top: 15px; }
+.nav button { margin: 0; }
+p { color: #ff4444; margin-top: 10px; }
+#badge { background: #ff4444; color: white; padding: 2px 6px; border-radius: 3px; font-size: 12px; }

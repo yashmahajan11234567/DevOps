@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle Marketplace - Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="/">Marketplace</a>
+      </div>
+      <ul class="nav-menu" id="navMenu">
+        <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+        <li class="nav-item" id="addProductNav" style="display: none;"><a href="/add-product.html" class="nav-link">Add Listing</a></li>
+        <li class="nav-item" id="authNav"><a href="/login.html" class="nav-link">Login/Register</a></li>
+        <li class="nav-item" id="logoutNav" style="display: none;"><a href="#" class="nav-link" onclick="logout(event)">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      <section class="hero">
+        <h1>Buy and Sell Used Cars & Bikes</h1>
+        <p>Simple vehicle listings with trusted seller details</p>
+      </section>
+
+      <section class="products-section">
+        <h2>Available Listings</h2>
+        <div class="products-grid" id="productsGrid">
+          <div class="loading">Loading listings...</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Used Vehicle Marketplace.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      checkAuthStatus();
+      loadProducts();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>D3 Weather Dashboard</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<style>
+    body{
+        font-family: Arial, system-ui, -apple-system, 'Segoe UI', Roboto;
+        background: linear-gradient(180deg, #e6f7ff 0%, #d0efff 100%);
+        padding:12px;
+        min-height: 100vh;
+        color: #062a47;
+    }
+    .header{
+        text-align: center;
+        color: #0b1730;
+        margin-bottom: 12px;
+    }
+    /* hide top title since sidebar displays title/author */
+    .header h1, .header p{ display:none }
+    .city-selector{
+        margin-top: 15px;
+    }
+    .city-selector label{
+        color: white;
+        margin-right: 10px;
+        font-size: 1.1em;
+    }
+    .city-selector select{
+        padding: 10px 14px;
+        font-size: 1rem;
+        border-radius: 8px;
+        border: 1px solid #e6eef8;
+        background-color: #ffffff;
+        color: #0b1730;
+        cursor: pointer;
+        font-weight: 700;
+        box-shadow: 0 4px 10px rgba(16,24,40,0.06);
+    }
+    .city-selector select:hover{
+        box-shadow: 0 6px 18px rgba(16,24,40,0.08);
+    }
+
+    .card{
+        background: #ffffff;
+        padding:18px;
+        border-radius:8px;
+        box-shadow:0 6px 20px rgba(16,24,40,0.08);
+        margin-bottom:20px;
+        color: #0b1730;
+    }
+    h2{
+        margin-bottom:12px;
+        color: #0b1730;
+        font-size:1.05rem;
+    }
+    .line{
+        fill:none;
+        stroke-width:3;
+    }
+    /* rainbow palette */
+    .temp{ stroke:#e63946; }      /* red */
+    .humidity{ stroke:#f77f00; }  /* orange */
+    .rain{ stroke:#fcbf49; }      /* yellow */
+    .wind{ stroke:#2a9d8f; }      /* green - if needed */
+    .pressure{ stroke:#457b9d; }  /* blue */
+    .other{ stroke:#7b2cbf; }     /* violet */
+
+    /* layout */
+    .layout{ display:flex; gap:12px; align-items:stretch; }
+    .sidebar{ width:360px; }
+    .sidebar-inner{ position:sticky; top:12px; background: linear-gradient(180deg,#0b3d91 0%, #062a78 100%); padding:20px; border-radius:10px; color:#ffffff; height: calc(100vh - 24px); overflow:auto; box-sizing:border-box; }
+    .side-title{ margin:0 0 6px 0; color:#041a5a; font-size:1.6rem; font-weight:800 }
+    .side-author{ margin:0 0 12px 0; color:#cfe8ff; font-size:0.95rem }
+    .side-sub{ margin:0 0 16px 0; color:#9fb7d9; font-size:0.95rem; }
+    /* make summary area grow to fill sidebar and distribute boxes evenly */
+    .summary{ display:flex; flex-direction:column; gap:14px; flex:1; }
+    .summary-item{ background:#ffffff; border-radius:10px; padding:16px 18px; box-shadow:0 6px 14px rgba(16,24,40,0.06); display:flex; flex-direction:column; justify-content:center; flex:0 0 auto; min-height:84px; }
+    .summary-item .label{ font-size:1rem; color:#475569; margin-bottom:8px }
+    .summary-item .value{ font-size:1.45rem; font-weight:800; color:#062a47 }
+
+    .main{ flex:1 }
+    /* 2x2 grid that fills the available height so all charts fit on one screen */
+    .grid{ display:grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap:12px; align-items:stretch; height: calc(100vh - 12px); }
+    @media (max-width:1100px){ .grid{ grid-template-columns: 1fr; grid-template-rows: none; height:auto; } .layout{flex-direction:column} .sidebar{width:100%} }
+    .card{ padding:16px; height:100%; box-sizing:border-box; }
+    /* make SVGs fill the card area (box-shaped) */
+    /* make SVGs smaller inside each card for compact layout */
+    /* let SVG fill the card area (below the title) */
+    .card{ overflow:visible }
+    .card svg{ width:100%; height: calc(100% - 72px); display:block; }
+    .city-selector select{ width:100%; }
+    /* SVG text/axis styling for readable contrast on white cards */
+    svg text{ fill:#475569; font-family: Arial; }
+    .card svg .axis path, .card svg .axis line{ stroke:#e6eef8; }
+    .card svg .axis text{ fill:#94a3b8; font-size:12px; }
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>🌦️ Weather Monitoring Dashboard</h1>
+    <p>By: Yash Mahajan</p>
+</div>
+<!-- Layout: sidebar left, main content right -->
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-inner">
+            <h2 class="side-title">Weather Monitoring</h2>
+            <p class="side-author">By: Yash Mahajan</p>
+            <p class="side-sub">Live summary</p>
+            <div class="city-selector" style="margin-bottom:12px;">
+                <label style="color:#cfe8ff; display:block; margin-bottom:6px;">Select City:</label>
+                <select id="citySelect" onchange="changeCity()">
+                    <option value="mumbai">Mumbai</option>
+                    <option value="pune">Pune</option>
+                    <option value="delhi">Delhi</option>
+                    <option value="bangalore">Bangalore</option>
+                    <option value="kolkata">Kolkata</option>
+                    <option value="hyderabad">Hyderabad</option>
+                    <option value="chennai">Chennai</option>
+                </select>
+            </div>
+            <div id="summary" class="summary">
+                <div class="summary-item">
+                    <div class="label">Avg Temp (°C)</div>
+                    <div id="avgTemp" class="value">--</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Latest Temp (°C)</div>
+                    <div id="latestTemp" class="value">--</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Avg Humidity (%)</div>
+                    <div id="avgHum" class="value">--</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Latest Humidity (%)</div>
+                    <div id="latestHum" class="value">--</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Total Rain (mm)</div>
+                    <div id="totalRain" class="value">--</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Latest Rain (mm)</div>
+                    <div id="latestRain" class="value">--</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+        <div class="grid">
+            <div class="card">
+                <h2>Weekly Weather Report</h2>
+                <svg width="100%" height="100%" id="chart1"></svg>
+            </div>
+
+            <div class="card">
+                <h2>Daily Temperature Variation</h2>
+                <svg width="100%" height="100%" id="chart2"></svg>
+            </div>
+
+            <div class="card">
+                <h2>Rainfall Trends</h2>
+                <svg width="100%" height="100%" id="chart3"></svg>
+            </div>
+
+            <div class="card">
+                <h2>Humidity Analysis</h2>
+                <svg width="100%" height="100%" id="chart4"></svg>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+
+let selectedCity = 'mumbai';
+
+const cityData = {
+    mumbai: [
+        {day:"Mon", temp:32, humidity:65, rain:12},
+        {day:"Tue", temp:33, humidity:68, rain:8},
+        {day:"Wed", temp:31, humidity:72, rain:22},
+        {day:"Thu", temp:30, humidity:75, rain:28},
+        {day:"Fri", temp:32, humidity:70, rain:15},
+        {day:"Sat", temp:34, humidity:60, rain:5},
+        {day:"Sun", temp:35, humidity:55, rain:2}
+    ],
+    pune: [
+        {day:"Mon", temp:24, humidity:55, rain:5},
+        {day:"Tue", temp:25, humidity:58, rain:8},
+        {day:"Wed", temp:22, humidity:62, rain:18},
+        {day:"Thu", temp:20, humidity:68, rain:32},
+        {day:"Fri", temp:23, humidity:65, rain:20},
+        {day:"Sat", temp:26, humidity:52, rain:3},
+        {day:"Sun", temp:28, humidity:48, rain:1}
+    ],
+    delhi: [
+        {day:"Mon", temp:40, humidity:25, rain:0},
+        {day:"Tue", temp:42, humidity:22, rain:0},
+        {day:"Wed", temp:39, humidity:30, rain:0},
+        {day:"Thu", temp:38, humidity:35, rain:2},
+        {day:"Fri", temp:41, humidity:28, rain:0},
+        {day:"Sat", temp:43, humidity:20, rain:0},
+        {day:"Sun", temp:44, humidity:18, rain:0}
+    ],
+    bangalore: [
+        {day:"Mon", temp:27, humidity:65, rain:4},
+        {day:"Tue", temp:28, humidity:63, rain:6},
+        {day:"Wed", temp:26, humidity:68, rain:10},
+        {day:"Thu", temp:25, humidity:72, rain:16},
+        {day:"Fri", temp:27, humidity:68, rain:8},
+        {day:"Sat", temp:29, humidity:60, rain:2},
+        {day:"Sun", temp:30, humidity:58, rain:1}
+    ],
+    kolkata: [
+        {day:"Mon", temp:31, humidity:78, rain:18},
+        {day:"Tue", temp:32, humidity:80, rain:24},
+        {day:"Wed", temp:30, humidity:82, rain:28},
+        {day:"Thu", temp:29, humidity:85, rain:35},
+        {day:"Fri", temp:31, humidity:80, rain:22},
+        {day:"Sat", temp:33, humidity:75, rain:10},
+        {day:"Sun", temp:34, humidity:72, rain:6}
+    ],
+    hyderabad: [
+        {day:"Mon", temp:33, humidity:50, rain:3},
+        {day:"Tue", temp:35, humidity:45, rain:1},
+        {day:"Wed", temp:32, humidity:55, rain:7},
+        {day:"Thu", temp:31, humidity:60, rain:12},
+        {day:"Fri", temp:34, humidity:48, rain:2},
+        {day:"Sat", temp:36, humidity:40, rain:0},
+        {day:"Sun", temp:38, humidity:38, rain:0}
+    ],
+    chennai: [
+        {day:"Mon", temp:34, humidity:80, rain:6},
+        {day:"Tue", temp:35, humidity:82, rain:9},
+        {day:"Wed", temp:33, humidity:85, rain:14},
+        {day:"Thu", temp:32, humidity:87, rain:20},
+        {day:"Fri", temp:34, humidity:83, rain:11},
+        {day:"Sat", temp:36, humidity:78, rain:4},
+        {day:"Sun", temp:37, humidity:75, rain:2}
+    ]
+};
+
+let data = cityData[selectedCity];
+
+function changeCity() {
+    selectedCity = document.getElementById('citySelect').value;
+    fetchData();
+}
+
+async function fetchData(){
+    const url = `/api/weather?city=${selectedCity}`;
+    try{
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('network');
+        data = await res.json();
+    }catch(err){
+        console.warn('Could not fetch live data, using fallback.');
+        data = cityData[selectedCity];
+    }
+    // Clear existing charts and redraw
+    d3.selectAll('svg > *').remove();
+    initCharts();
+    updateSummary();
+}
+
+function updateSummary(){
+    if(!data || !data.length) return;
+    const temps = data.map(d=>+d.temp);
+    const hums = data.map(d=>+d.humidity);
+    const rains = data.map(d=>+d.rain);
+    const avg = arr=>Math.round((arr.reduce((s,v)=>s+v,0)/arr.length)*10)/10;
+    const sum = arr=>Math.round(arr.reduce((s,v)=>s+v,0)*10)/10;
+    document.getElementById('avgTemp').textContent = avg(temps);
+    document.getElementById('latestTemp').textContent = temps[temps.length-1];
+    document.getElementById('avgHum').textContent = avg(hums);
+    document.getElementById('latestHum').textContent = hums[hums.length-1];
+    document.getElementById('totalRain').textContent = sum(rains);
+    document.getElementById('latestRain').textContent = rains[rains.length-1];
+}
+
+
+function initCharts() {
+
+const margin = {top:30,right:20,bottom:30,left:40};
+
+// Chart 1: measure the actual SVG size and fill the available card area
+const svg = d3.select("#chart1");
+let bbox = svg.node().getBoundingClientRect();
+let outerW = bbox.width;
+let outerH = bbox.height;
+let width = outerW - margin.left - margin.right;
+let height = outerH - margin.top - margin.bottom;
+
+const g = svg.append("g")
+.attr("transform",`translate(${margin.left},${margin.top})`);
+
+const x = d3.scalePoint()
+.domain(data.map(d=>d.day))
+.range([0,width]);
+
+const y = d3.scaleLinear()
+.domain([0,100])
+.range([height,0]);
+
+g.append("g")
+.attr("transform",`translate(0,${height})`)
+.call(d3.axisBottom(x));
+
+g.append("g")
+.call(d3.axisLeft(y));
+
+const tempLine = d3.line()
+.x(d=>x(d.day))
+.y(d=>y(d.temp));
+
+const humidityLine = d3.line()
+.x(d=>x(d.day))
+.y(d=>y(d.humidity));
+
+const rainLine = d3.line()
+.x(d=>x(d.day))
+.y(d=>y(d.rain));
+
+g.append("path").datum(data).attr("class","line temp").attr("d",tempLine).attr('stroke','#ff9f1c');
+g.append("path").datum(data).attr("class","line humidity").attr("d",humidityLine).attr('stroke','#2ec4b6');
+g.append("path").datum(data).attr("class","line rain").attr("d",rainLine).attr('stroke','#7b2cbf');
+
+// legend intentionally removed to keep the plot area clean
+
+// Chart 2: Daily Temperature Variation - measure its SVG and fill
+const svg2 = d3.select("#chart2");
+bbox = svg2.node().getBoundingClientRect();
+outerW = bbox.width;
+outerH = bbox.height;
+const width2 = outerW - margin.left - margin.right;
+const height2 = outerH - margin.top - margin.bottom;
+const g2 = svg2.append("g").attr("transform",`translate(${margin.left},${margin.top})`);
+const x2 = d3.scaleBand().domain(data.map(d=>d.day)).range([0,width2]).padding(0.1);
+const y2 = d3.scaleLinear().domain([d3.min(data,d=>d.temp)-2, d3.max(data,d=>d.temp)+2]).range([height2,0]);
+g2.append("g").attr("transform",`translate(0,${height2})`).call(d3.axisBottom(x2));
+g2.append("g").call(d3.axisLeft(y2));
+g2.selectAll(".bar").data(data).enter().append("rect")
+.attr("class","bar").attr("x",d=>x2(d.day)).attr("y",d=>y2(d.temp))
+.attr("width",x2.bandwidth()).attr("height",d=>height2-y2(d.temp))
+.attr("fill","#ff7b2d");
+g2.append("text").attr("x",width2/2).attr("y",-5).attr("text-anchor","middle").text("Temperature (°C)");
+
+// Chart 3: Rainfall Trends - measure its SVG and fill
+const svg3 = d3.select("#chart3");
+bbox = svg3.node().getBoundingClientRect();
+outerW = bbox.width;
+outerH = bbox.height;
+const width3 = outerW - margin.left - margin.right;
+const height3 = outerH - margin.top - margin.bottom;
+const g3 = svg3.append("g").attr("transform",`translate(${margin.left},${margin.top})`);
+const x3 = d3.scalePoint().domain(data.map(d=>d.day)).range([0,width3]);
+const y3 = d3.scaleLinear().domain([0, d3.max(data,d=>d.rain)+5]).range([height3,0]);
+g3.append("g").attr("transform",`translate(0,${height3})`).call(d3.axisBottom(x3));
+g3.append("g").call(d3.axisLeft(y3));
+g3.selectAll(".rain-circle").data(data).enter().append("circle")
+.attr("class","rain-circle").attr("cx",d=>x3(d.day)).attr("cy",d=>y3(d.rain))
+.attr("r",6).attr("fill","#9b5de5").attr("opacity",0.85)
+.append("title").text(d=>`${d.day}: ${d.rain}mm`);
+const rainPath = d3.line().x(d=>x3(d.day)).y(d=>y3(d.rain));
+g3.append("path").datum(data).attr("class","line rain").attr("d",rainPath).attr("stroke","#9b5de5");
+
+// Chart 4: Humidity Analysis - measure its SVG and fill
+const svg4 = d3.select("#chart4");
+bbox = svg4.node().getBoundingClientRect();
+outerW = bbox.width;
+outerH = bbox.height;
+const width4 = outerW - margin.left - margin.right;
+const height4 = outerH - margin.top - margin.bottom;
+const g4 = svg4.append("g").attr("transform",`translate(${margin.left},${margin.top})`);
+const x4 = d3.scaleBand().domain(data.map(d=>d.day)).range([0,width4]).padding(0.1);
+const y4 = d3.scaleLinear().domain([d3.min(data,d=>d.humidity)-5, d3.max(data,d=>d.humidity)+5]).range([height4,0]);
+g4.append("g").attr("transform",`translate(0,${height4})`).call(d3.axisBottom(x4));
+g4.append("g").call(d3.axisLeft(y4));
+g4.selectAll(".humidity-bar").data(data).enter().append("rect")
+.attr("class","humidity-bar").attr("x",d=>x4(d.day)).attr("y",d=>y4(d.humidity))
+.attr("width",x4.bandwidth()).attr("height",d=>height4-y4(d.humidity))
+.attr("fill","#2ec4b6");
+g4.append("text").attr("x",width4/2).attr("y",-5).attr("text-anchor","middle").text("Humidity (%)");
+
+}
+
+// Initialize charts by fetching live data, then poll every 5s
+fetchData();
+setInterval(fetchData, 5000);
+
+</script>
+
+</body>
+</html>

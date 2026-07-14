@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Performance Dashboard | Student Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="dashboard-container" id="main-dashboard">
+        <header>
+            <h1>Student Performance Analytics</h1>
+            <p>Comprehensive overview of results for Academic Batch 2024</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Students</div>
+                <div class="stat-value" id="total-students">70</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Overall Pass Rate</div>
+                <div class="stat-value" id="pass-rate">--%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Students Passed</div>
+                <div class="stat-value" id="passed-count" style="color: var(--success-color)">--</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Students Failed</div>
+                <div class="stat-value" id="failed-count" style="color: var(--danger-color)">--</div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Overall Results Distribution</h3>
+                <div class="canvas-wrapper">
+                    <canvas id="ratioChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Subject-wise Success Rate</h3>
+                <div class="canvas-wrapper">
+                    <canvas id="subjectChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div class="table-header">
+                <h3>Detailed Student Performance</h3>
+                <div class="search-box">
+                    <!-- Search could be added here later -->
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Roll No.</th>
+                        <th>Name</th>
+                        <th>Sub 1</th>
+                        <th>Sub 2</th>
+                        <th>Sub 3</th>
+                        <th>Sub 4</th>
+                        <th>Sub 5</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody id="students-body">
+                    <!-- Dynamic Injection -->
+            </table>
+        </div>
+    </div>
+
+    <!-- Student Dashboard -->
+    <div class="dashboard-container" id="student-dashboard" style="display: none;">
+        <header>
+            <button id="back-btn" class="back-btn">← Back to Main Dashboard</button>
+            <h1 id="sd-name">Student Name</h1>
+            <p id="sd-roll">Roll No: --</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Overall Result</div>
+                <div class="stat-value" id="sd-status">--</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Marks</div>
+                <div class="stat-value" id="sd-total">--/500</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Percentage</div>
+                <div class="stat-value" id="sd-percentage">--%</div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div class="table-header">
+                <h3>Subject-wise Performance</h3>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Marks Obtained</th>
+                        <th>Maximum Marks</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="sd-subjects-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

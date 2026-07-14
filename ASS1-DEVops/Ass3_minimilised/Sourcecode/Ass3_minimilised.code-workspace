@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../Ass3"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Ass3_minimilised"
+	}
+}

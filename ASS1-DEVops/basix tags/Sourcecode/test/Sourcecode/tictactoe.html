@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tic Tac Toe</title>
+  <style>
+    * { box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+      color: #fff;
+    }
+    .game {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      text-align: center;
+      width: 320px;
+    }
+    h1 { margin-top: 0; margin-bottom: 12px; }
+    .status {
+      margin: 10px 0 16px;
+      font-size: 18px;
+      min-height: 24px;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .cell {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.15s, box-shadow 0.2s;
+      user-select: none;
+      box-shadow: inset 0 0 10px rgba(255,255,255,0.15);
+    }
+    .cell.X { color: #ff6b6b; }
+    .cell.O { color: #4dd0e1; }
+    .cell:hover { background: rgba(255,255,255,0.25); }
+    .cell:active { transform: scale(0.96); }
+    .cell.disabled { cursor: not-allowed; opacity: 0.6; }
+    .controls {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    button {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 14px;
+      background: linear-gradient(135deg, #f7971e, #ffd200);
+      color: #1a1a1a;
+      transition: transform 0.1s, opacity 0.1s;
+    }
+    button:hover { opacity: 0.9; }
+    button:active { transform: scale(0.96); }
+    .footer {
+      margin-top: 10px;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="game">
+    <h1>Tic Tac Toe</h1>
+    <div class="status" id="status">Player X's turn</div>
+    <div class="board" id="board"></div>
+    <div class="controls">
+      <button onclick="resetGame()">Restart</button>
+      <button onclick="toggleMode()" id="modeBtn">Mode: 2 Players</button>
+    </div>
+    <div class="footer">Single-file HTML • No libraries</div>
+  </div>
+
+  <script>
+    // Game state
+    var board = ['', '', '', '', '', '', '', '', ''];
+    var currentPlayer = 'X';
+    var gameActive = true;
+    var vsComputer = false;
+
+    var statusEl = document.getElementById('status');
+    var boardEl = document.getElementById('board');
+    var modeBtn = document.getElementById('modeBtn');
+
+    // Winning combinations
+    var wins = [
+      [0,1,2],[3,4,5],[6,7,8],
+      [0,3,6],[1,4,7],[2,5,8],
+      [0,4,8],[2,4,6]
+    ];
+
+    // Create board UI
+    function createBoard() {
+      boardEl.innerHTML = '';
+      for (var i = 0; i < 9; i++) {
+        var cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.setAttribute('data-index', i);
+        cell.addEventListener('click', onCellClick);
+        boardEl.appendChild(cell);
+      }
+    }
+
+    function onCellClick(e) {
+      var index = e.target.getAttribute('data-index');
+      if (!gameActive || board[index] !== '') return;
+
+      makeMove(index, currentPlayer);
+
+      if (vsComputer && gameActive && currentPlayer === 'O') {
+        setTimeout(computerMove, 300);
+      }
+    }
+
+    function makeMove(index, player) {
+      board[index] = player;
+      updateUI();
+
+      if (checkWin(player)) {
+        statusEl.textContent = 'Player ' + player + ' wins!';
+        gameActive = false;
+        disableBoard();
+      } else if (board.indexOf('') === -1) {
+        statusEl.textContent = "It's a draw!";
+        gameActive = false;
+      } else {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        statusEl.textContent = 'Player ' + currentPlayer + "'s turn";
+      }
+    }
+
+    function checkWin(player) {
+      for (var i = 0; i < wins.length; i++) {
+        var combo = wins[i];
+        if (board[combo[0]] === player && board[combo[1]] === player && board[combo[2]] === player) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function updateUI() {
+      var cells = document.getElementsByClassName('cell');
+      for (var i = 0; i < 9; i++) {
+        cells[i].textContent = board[i];
+        cells[i].classList.remove('X','O');
+        if (board[i] !== '') cells[i].classList.add(board[i]);
+      }
+    }
+
+    function disableBoard() {
+      var cells = document.getElementsByClassName('cell');
+      for (var i = 0; i < cells.length; i++) {
+        cells[i].classList.add('disabled');
+      }
+    }
+
+    function resetGame() {
+      board = ['', '', '', '', '', '', '', '', ''];
+      currentPlayer = 'X';
+      gameActive = true;
+      statusEl.textContent = "Player X's turn";
+      createBoard();
+    }
+
+    function toggleMode() {
+      vsComputer = !vsComputer;
+      modeBtn.textContent = vsComputer ? 'Mode: Vs Computer' : 'Mode: 2 Players';
+      resetGame();
+    }
+
+    // Simple AI (random move)
+    function computerMove() {
+      var empty = [];
+      for (var i = 0; i < 9; i++) {
+        if (board[i] === '') empty.push(i);
+      }
+      if (empty.length === 0) return;
+      var move = empty[Math.floor(Math.random() * empty.length)];
+      makeMove(move, 'O');
+    }
+
+    // Init
+    createBoard();
+  </script>
+</body>
+</html>

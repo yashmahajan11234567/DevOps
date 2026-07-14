@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Shop</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<section id="login">
+<h2>Login</h2>
+<input id="u" placeholder="User">
+<input id="p" type="password" placeholder="Pass">
+<button onclick="login()">Login</button>
+<p id="msg"></p>
+</section>
+
+<section id="home">
+<h2>Products <span id="badge"></span></h2>
+<div id="prods"></div>
+<div class="nav">
+<button onclick="show('cart')">Cart</button>
+</div>
+</section>
+
+<section id="cart">
+<h2>Cart (<span id="count">0</span> items)</h2>
+<ul id="items"></ul>
+<div id="total"></div>
+<div class="nav">
+<button onclick="show('home')">Continue Shopping</button>
+<button onclick="show('checkout')">Checkout</button>
+</div>
+</section>
+
+<section id="checkout">
+<h2>Checkout</h2>
+<input id="name" placeholder="Name">
+<input id="addr" placeholder="Address">
+<div class="nav">
+<button onclick="show('cart')">Back</button>
+<button onclick="order()">Place Order</button>
+</div>
+</section>
+
+<section id="bill">
+<h2>Order Confirmed</h2>
+<div id="bill"></div>
+<div class="nav">
+<button onclick="show('home')">Continue Shopping</button>
+</div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

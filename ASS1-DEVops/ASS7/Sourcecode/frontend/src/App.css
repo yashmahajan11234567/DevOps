@@ -1,0 +1,143 @@
+.app-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: Arial, sans-serif;
+  color: #222;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.auth-form,
+.feedback-form,
+.feedback-list,
+.course-filter {
+  background: #fdfdfd;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.auth-switch {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.auth-switch button {
+  flex: 1;
+  background: #f3f3f3;
+  border: 1px solid #ddd;
+  padding: 12px 16px;
+  cursor: pointer;
+}
+
+.auth-switch button.active {
+  background: #0b6cff;
+  color: #fff;
+  border-color: #0b6cff;
+}
+
+.auth-form label,
+.feedback-form label {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.auth-form input,
+.feedback-form input,
+.feedback-form select,
+.feedback-form textarea,
+.course-filter input {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 6px;
+  box-sizing: border-box;
+}
+
+.auth-form button,
+.feedback-form button,
+.course-filter button,
+.logout-button {
+  background: #0b6cff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
+  cursor: pointer;
+}
+
+.auth-form button:hover,
+.feedback-form button:hover,
+.course-filter button:hover,
+.logout-button:hover {
+  background: #0958cc;
+}
+
+.course-filter {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.course-filter label {
+  flex: 1;
+}
+
+.feedback-item {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.feedback-item:last-child {
+  border-bottom: none;
+}
+
+.feedback-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feedback-header button {
+  background: transparent;
+  border: 1px solid #d33;
+  color: #d33;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.feedback-header button:hover {
+  background: #fef0f0;
+}
+
+.rating {
+  margin: 10px 0 8px;
+  font-weight: bold;
+}
+
+.error-message {
+  color: #a00;
+  margin-bottom: 18px;
+}
+
+.signed-in-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eef6ff;
+  border: 1px solid #cce1ff;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+}
+
+.signed-in-bar p {
+  margin: 0;
+}

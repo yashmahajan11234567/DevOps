@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Weather Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+body{
+  font-family:Segoe UI;
+  background:#0b0f1a;
+  color:white;
+  padding:20px;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+h1{
+  text-align:center;
+  color:#00e5ff;
+  margin-bottom:20px;
+}
+
+.controls{
+  text-align:center;
+  margin:20px 0;
+}
+
+select,button{
+  padding:10px 15px;
+  margin:5px;
+  border:none;
+  border-radius:8px;
+  background:#111827;
+  color:#00e5ff;
+  cursor:pointer;
+  border:1px solid #00e5ff;
+  transition:0.3s;
+}
+
+select:hover,button:hover{
+  background:#00e5ff;
+  color:black;
+}
+
+.stats{
+  display:flex;
+  justify-content:space-around;
+  background:#111827;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:20px;
+  border:1px solid #00e5ff;
+  box-shadow:0 0 15px rgba(0,229,255,0.2);
+}
+
+.stat-value{
+  font-size:22px;
+  color:#00e5ff;
+  font-weight:bold;
+}
+
+.dashboard{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:#111827;
+  padding:15px;
+  border-radius:12px;
+  border:1px solid #00e5ff;
+  box-shadow:0 0 15px rgba(0,229,255,0.15);
+}
+
+.card h3{
+  color:#00e5ff;
+}
+
+canvas{
+  height:220px !important;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>⚡ Weather Dashboard</h1>
+
+<div class="controls">
+<select id="city" onchange="updateCharts()">
+<option value="pune">Pune</option>
+<option value="mumbai">Mumbai</option>
+<option value="delhi">Delhi</option>
+<option value="bangalore">Bangalore</option>
+</select>
+
+<button onclick="toggleTemperature()">°C / °F</button>
+</div>
+
+<div class="stats">
+<div>
+Max:<div id="maxTemp" class="stat-value">-</div>
+</div>
+<div>
+Min:<div id="minTemp" class="stat-value">-</div>
+</div>
+<div>
+Humidity:<div id="avgHumidity" class="stat-value">-</div>
+</div>
+<div>
+Rain:<div id="totalRain" class="stat-value">-</div>
+</div>
+</div>
+
+<div class="dashboard">
+
+<div class="card">
+<h3>Temperature</h3>
+<canvas id="tempChart"></canvas>
+</div>
+
+<div class="card">
+<h3>Humidity</h3>
+<canvas id="humidityChart"></canvas>
+</div>
+
+<div class="card">
+<h3>Rainfall</h3>
+<canvas id="rainChart"></canvas>
+</div>
+
+<div class="card">
+<h3>Wind Speed</h3>
+<canvas id="windChart"></canvas>
+</div>
+
+<div class="card">
+<h3>Temperature Distribution</h3>
+<canvas id="distChart"></canvas>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let isCelsius = true;
+
+const weatherData = {
+pune:{t:[24,26,28,27,25,24,23],h:[60,58,55,57,59,62,65],r:[0,2,5,1,0,0,0],w:[8,10,12,9,7,6,5]},
+mumbai:{t:[27,28,29,29,28,27,27],h:[75,78,80,79,77,76,78],r:[5,12,20,18,10,6,8],w:[12,14,16,13,11,10,9]},
+delhi:{t:[18,20,22,23,21,19,18],h:[50,48,45,46,49,52,54],r:[0,0,1,0,0,0,0],w:[6,8,10,7,6,5,4]},
+bangalore:{t:[22,23,25,26,25,23,22],h:[65,63,60,62,64,66,68],r:[2,4,8,6,3,1,1],w:[9,11,13,10,8,7,6]}
+};
+
+const labels = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+
+let tempChart, humidityChart, rainChart, windChart, distChart;
+
+const chartOptions = {
+  responsive:true,
+  plugins:{
+    legend:{labels:{color:"white"}}
+  },
+  scales:{
+    x:{ticks:{color:"white"},grid:{color:"#1f2937"}},
+    y:{ticks:{color:"white"},grid:{color:"#1f2937"}}
+  }
+};
+
+function createCharts() {
+
+tempChart = new Chart(document.getElementById("tempChart"), {
+type:'line',
+data:{labels:labels,datasets:[{
+label:'Temp',
+data:[],
+borderColor:'#00e5ff',
+backgroundColor:'rgba(0,229,255,0.2)',
+fill:true
+}]},
+options:chartOptions
+});
+
+humidityChart = new Chart(document.getElementById("humidityChart"), {
+type:'bar',
+data:{labels:labels,datasets:[{
+label:'Humidity',
+data:[],
+backgroundColor:'#00e5ff'
+}]},
+options:chartOptions
+});
+
+rainChart = new Chart(document.getElementById("rainChart"), {
+type:'bar',
+data:{labels:labels,datasets:[{
+label:'Rain',
+data:[],
+backgroundColor:'#0099ff'
+}]},
+options:chartOptions
+});
+
+windChart = new Chart(document.getElementById("windChart"), {
+type:'line',
+data:{labels:labels,datasets:[{
+label:'Wind Speed',
+data:[],
+borderColor:'#00ffff',
+backgroundColor:'rgba(0,255,255,0.2)',
+fill:true
+}]},
+options:chartOptions
+});
+
+distChart = new Chart(document.getElementById("distChart"), {
+type:'pie',
+data:{
+labels:["Cold","Mild","Hot"],
+datasets:[{
+data:[0,0,0],
+backgroundColor:["#00e5ff","#0099ff","#0044ff"]
+}]
+}
+});
+
+}
+
+function updateCharts(){
+
+const city = document.getElementById("city").value;
+const data = weatherData[city];
+
+let temps = data.t.map(x => isCelsius ? x : Math.round(x*9/5+32));
+
+tempChart.data.datasets[0].data = temps;
+humidityChart.data.datasets[0].data = data.h;
+rainChart.data.datasets[0].data = data.r;
+windChart.data.datasets[0].data = data.w;
+
+tempChart.update();
+humidityChart.update();
+rainChart.update();
+windChart.update();
+
+document.getElementById("maxTemp").innerText =
+Math.max(...temps) + (isCelsius ? "°C":"°F");
+
+document.getElementById("minTemp").innerText =
+Math.min(...temps) + (isCelsius ? "°C":"°F");
+
+document.getElementById("avgHumidity").innerText =
+Math.round(data.h.reduce((a,b)=>a+b)/7) + "%";
+
+document.getElementById("totalRain").innerText =
+data.r.reduce((a,b)=>a+b) + "mm";
+
+distChart.data.datasets[0].data = [
+temps.filter(x=>x<20).length,
+temps.filter(x=>x>=20 && x<26).length,
+temps.filter(x=>x>=26).length
+];
+
+distChart.update();
+
+}
+
+function toggleTemperature(){
+isCelsius = !isCelsius;
+updateCharts();
+}
+
+createCharts();
+updateCharts();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Yash Mahajan | Student Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0b1120;
+            color: #e5e7eb;
+        }
+
+        /* LAYOUT */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 300px;
+            background: #020617;
+            padding: 40px 25px;
+        }
+
+        .content {
+            margin-left: 300px;
+            padding: 50px;
+        }
+
+        /* SIDEBAR */
+        .sidebar h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .sidebar p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .sidebar a {
+            display: block;
+            margin: 12px 0;
+            color: #c7d2fe;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            color: #6366f1;
+        }
+
+        /* SECTIONS */
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section h2 {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            border-left: 4px solid #6366f1;
+            padding-left: 12px;
+        }
+
+        /* CARDS */
+        .card-dark {
+            background: #020617;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+        }
+
+        /* SKILLS */
+        .skill {
+            display: inline-block;
+            padding: 8px 14px;
+            margin: 6px;
+            border-radius: 20px;
+            background: #1e293b;
+            color: #e5e7eb;
+            font-size: 13px;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            color: #64748b;
+            margin-top: 80px;
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+            .content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h1>Yash Mahajan</h1>
+    <p>
+        Third-Year BTech Student<br>
+        Computer Engineering<br>
+        PCCOE Pune
+    </p>
+
+    <p class="mt-3">
+        PRN: 123b1b289<br>
+        yash.mahajan23@pccoepune.org
+    </p>
+
+    <hr class="text-secondary">
+
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+        <h2>About Me</h2>
+        <div class="card-dark">
+            <p>
+                I am a third-year BTech student in Computer Engineering with a strong academic
+                interest in Machine Learning, Deep Learning, and data-driven systems.
+                I enjoy applying theoretical concepts through structured academic projects.
+            </p>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+        <h2>Technical Skills</h2>
+        <div class="card-dark">
+            <span class="skill">Python</span>
+            <span class="skill">C++</span>
+            <span class="skill">R Programming</span>
+            <span class="skill">Power BI</span>
+            <span class="skill">Machine Learning (ML)</span>
+            <span class="skill">Deep Learning</span>
+            <span class="skill">TensorFlow</span>
+            <span class="skill">Data Analysis</span>
+            <span class="skill">DSA</span>
+            <span class="skill">DBMS</span>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+        <h2>Academic & Personal Projects</h2>
+
+        <div class="card-dark">
+            <h5>Instacart Market Basket Analysis</h5>
+            <p>
+                Data analysis project focused on understanding customer purchasing patterns
+                using the Instacart dataset, exploratory data analysis, and association rules.
+            </p>
+        </div>
+
+        <div class="card-dark">
+            <h5>House Price Prediction using AI</h5>
+            <p>
+                Machine learning project to predict house prices using regression models,
+                feature engineering, and performance evaluation techniques.
+            </p>
+        </div>
+
+        <div class="card-dark">
+            <h5>Time Table & Scheduling System</h5>
+            <p>
+                Static academic project designed to present weekly schedules
+                in a clean and structured format.
+            </p>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+        <h2>Contact</h2>
+        <div class="card-dark">
+            <p>Email: yash.mahajan23@pccoepune.org</p>
+            <p>Location: Pune, India</p>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 Yash Mahajan • Student Portfolio
+    </footer>
+
+</div>
+
+</body>
+</html>

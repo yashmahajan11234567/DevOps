@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | <%= site.collegeName %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('partials/header', { site }) %>
+  <main class="page">
+    <section class="page-hero">
+      <p class="eyebrow">Contact</p>
+      <h1>Reach the admissions office</h1>
+      <p>Use the contact form for general questions, campus visits, or program details.</p>
+      <% if (submitted) { %>
+        <div class="notice success">Your message was sent successfully.</div>
+      <% } %>
+    </section>
+    <section class="form-card">
+      <form method="POST" action="/contact" class="form-grid">
+        <label>
+          Full name
+          <input type="text" name="name" placeholder="Your name" required />
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" placeholder="name@example.com" required />
+        </label>
+        <label>
+          Subject
+          <input type="text" name="subject" placeholder="Subject" />
+        </label>
+        <label class="full">
+          Message
+          <textarea name="message" rows="5" placeholder="Your message" required></textarea>
+        </label>
+        <div class="full">
+          <button class="btn primary" type="submit">Send message</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <%- include('partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,255 @@
+
+Assignment No 1
+MANISHA PAWAR
+•
+Yesterday
+100 points
+Create a static web page which defines all text formatting tags of HTML in tabular format.
+Assignment No. 1.html
+HTML
+
+Assignment No1.docx
+Microsoft Word
+
+Class comments
+Your work
+Assigned
+Private comments
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Text Formatting Tags</title>
+    <style>
+        /* Embed the CSS directly in the HTML file for simplicity */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 1px dashed #3498db;
+            padding-bottom: 5px;
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f8ff;
+        }
+
+        tr:hover {
+            background-color: #e9f5ff;
+        }
+
+        .code-tag {
+            font-family: 'Courier New', monospace;
+            background-color: #ecf0f1;
+            padding: 2px 5px;
+            border-radius: 4px;
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        .example-output {
+            color: #27ae60;
+            font-weight: 500;
+        }
+        
+        /* Styling for the sample case section */
+        #sample-output {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        blockquote {
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 5px solid #e74c3c;
+            background-color: #fcecec;
+            font-style: italic;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>📚 HTML Text Formatting Tags Reference</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Tag</th>
+                <th>Description</th>
+                <th>Example Code</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="code-tag">&lt;b&gt;</td>
+                <td>**Bold** text (Presentation).</td>
+                <td><code class="code-tag">&lt;b&gt;Bold Text&lt;/b&gt;</code></td>
+                <td class="example-output"><b>Bold Text</b></td>
+            </tr>
+            <tr>
+                <td class="code-tag">&lt;strong&gt;</td>
+                <td>Defines **important** text (Semantic).</td>
+                <td><code class="code-tag">&lt;strong&gt;Important Text&lt;/strong&gt;</code></td>
+                <td class="example-output"><strong>Important Text</strong></td>
+            </tr>
+            <tr>
+                <td class="code-tag">&lt;i&gt;</td>
+                <td>**Italic** text (Presentation).</td>
+                <td><code class="code-tag">&lt;i&gt;Italic Text&lt;/i&gt;</code></td>
+                <td class="example-output"><i>Italic Text</i></td>
+            </tr>
+            <tr>
+                <td class="code-tag">&lt;em&gt;</td>
+                <td>Defines **emphasized** text (Semantic).</td>
+                <td><code class="code-tag">&lt;em&gt;Emphasized Text&lt;/em&gt;</code></td>
+                <td class="example-output"><em>Emphasized Text</em></td>
+            </tr>
+            <tr>
+                <td class="code-tag">&lt;mark&gt;</td>
+                <td>Defines **highlighted** text.</td>
+                <td><code class="code-tag">&lt;mark&gt;Highlighted Text&lt;/mark&gt;</code></td>
+                <td class="example-output"><mark>Highlighted Text</mark></td>
+            </tr>
+            <tr>
+                <td class="code-tag">&lt;small&gt;</td>
+                <td>Renders text one size **smaller**.</td>
+                <td><code class="code-tag">&lt;small&gt;Smaller Text&lt;/small&gt;</code></td>
+                <td class="example-output"><small>Smaller Text</small></td>
+            </tr>
+            <tr>
+                <td class="code-tag">&lt;del&gt;</td>
+                <td>Defines **deleted** text (Strikethrough).</td>
+                <td><code class="code-tag">&lt;del&gt;Deleted Text&lt;/del&gt;</code></td>
+                <td class="example-output"><del>Deleted Text</del></td>
+            </tr>
+            <tr>
+                <td class="code-tag">&lt;ins&gt;</td>
+                <td>Defines **inserted** text (Underline).</td>
+                <td><code class="code-tag">&lt;ins&gt;Inserted Text&lt;/ins&gt;</code></td>
+                <td class="example-output"><ins>Inserted Text</ins></td>
+            </tr>
+            <tr>
+                <td class="code-tag">&lt;sub&gt;</td>
+                <td>Defines **subscripted** text (e.g., $\text{H}_2\text{O}$).</td>
+                <td><code class="code-tag">H&lt;sub&gt;2&lt;/sub&gt;O</code></td>
+                <td class="example-output">H<sub>2</sub>O</td>
+            </tr>
+            <tr>
+                <td class="code-tag">&lt;sup&gt;</td>
+                <td>Defines **superscripted** text (e.g., $\text{x}^2$).</td>
+                <td><code class="code-tag">x&lt;sup&gt;2&lt;/sup&gt;</code></td>
+                <td class="example-output">x<sup>2</sup></td>
+            </tr>
+            <tr>
+                <td class="code-tag">&lt;abbr&gt;</td>
+                <td>Defines an **abbreviation** (use `title`).</td>
+                <td><code class="code-tag">&lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;</code></td>
+                <td class="example-output"><abbr title="HyperText Markup Language">HTML</abbr></td>
+            </tr>
+            <tr>
+                <td class="code-tag">&lt;code&gt;</td>
+                <td>Defines a piece of **computer code**.</td>
+                <td><code class="code-tag">&lt;code&gt;console.log()&lt;/code&gt;</code></td>
+                <td class="example-output"><code>console.log()</code></td>
+            </tr>
+            <tr>
+                <td class="code-tag">&lt;blockquote&gt;</td>
+                <td>Defines a section that is **quoted** (Block-level).</td>
+                <td><code class="code-tag">&lt;blockquote&gt;...&lt;/blockquote&gt;</code></td>
+                <td class="example-output">See section below.</td>
+            </tr>
+            <tr>
+                <td class="code-tag">&lt;q&gt;</td>
+                <td>Defines a **short inline quotation**.</td>
+                <td><code class="code-tag">&lt;q&gt;Inline Quote&lt;/q&gt;</code></td>
+                <td class="example-output"><q>Inline Quote</q></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h2>🧪 Sample Case Demonstration: Semantic and Presentation Tags in Use</h2>
+    
+    <div id="sample-output">
+        <p>
+            Today, we're issuing a
+            <strong>strong correction</strong>
+            to an old post. We had initially printed the water formula as
+            H<sup>2</sup>O
+            (using a 
+            <del>deleted 2</del> 
+            but it should, of course, be H<sub>2</sub>O (subscript and superscript).
+            This specific error was
+            <small>small</small> 
+            and easily fixed.
+        </p>
+        
+        <p>
+            To <em>emphasize</em> the importance of accuracy in all technical fields, we’d like to 
+            <q>quote the famous programming dictum: Keep it Simple, Stupid</q>. 
+            The original programmer's note included the abbreviation 
+            <abbr title="Keep It Simple, Stupid">KISS</abbr>, 
+            followed by the 
+            <code>code snippet: if (error != true)</code>. 
+            
+            <mark>Mark that last point well.</mark> 
+            
+            This simple principle, though sometimes delivered in a very 
+            <b>bold</b> 
+            and slightly <i>italic</i> way, remains paramount. 
+            A final note: we have
+            <ins>inserted this sentence</ins>
+            to confirm the update.
+        </p>
+
+        <p>
+            The article concludes with a longer quote from the lead scientist:
+        </p>
+        
+        <blockquote>
+            "The mistake with H2O was a regrettable oversight. We must always strive for semantic correctness, using &lt;strong&gt; for importance and &lt;em&gt; for emphasis, rather than just &lt;b&gt; and &lt;i&gt; for appearance alone. This incident serves as a good reminder."
+        </blockquote>
+    </div>
+
+</body>
+</html>
