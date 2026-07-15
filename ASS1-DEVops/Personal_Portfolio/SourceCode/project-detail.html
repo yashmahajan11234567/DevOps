@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Yash Mahajan - Data Analyst Portfolio. Explore detailed case studies of data analytics projects.">
+    <meta name="keywords" content="Data Analytics, Project Details, Case Study, Portfolio">
+    <meta name="author" content="Yash Mahajan">
+    <title id="pageTitle">Project Details | Yash Mahajan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar (Reused) -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <h1 class="brand-name">Yash Mahajan</h1>
+                <p class="brand-subtitle">Data Analytics</p>
+            </div>
+
+            <div class="navbar-menu" id="navMenu">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+
+            <button class="hamburger" id="hamburgerBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <a href="#" class="btn-primary nav-cta" download>Download Resume</a>
+        </div>
+    </nav>
+
+    <main id="project-detail">
+        <!-- 404 Section (Initially Hidden) -->
+        <section id="notFoundSection" class="not-found-section" style="display: none;">
+            <div class="container text-center">
+                <h1 class="section-title">Project Not Found</h1>
+                <p class="section-subtitle">The project you are looking for does not exist or has been moved.</p>
+                <a href="projects.html" class="btn-primary mt-4">Back to Projects</a>
+            </div>
+        </section>
+
+        <!-- Main Project Content (Initially Hidden, Populated by JS) -->
+        <div id="projectContent" style="display: none;">
+            <!-- Breadcrumb Navigation -->
+            <section class="breadcrumb-section">
+                <div class="container">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol class="breadcrumb-list">
+                            <li class="breadcrumb-item">
+                                <a href="index.html#home">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="projects.html">Projects</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                <span id="breadcrumbProjectName"></span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </section>
+
+            <!-- Hero Section -->
+            <section class="project-hero">
+                <div class="container">
+                    <div class="hero-header">
+                        <div class="project-meta">
+                            <span class="project-tag-category" id="heroProjectCategory"></span>
+                            <span class="project-tag-year" id="heroProjectYear"></span>
+                        </div>
+
+                        <h1 class="project-title" id="heroProjectTitle"></h1>
+
+                        <p class="project-subtitle" id="heroProjectSubtitle"></p>
+
+                        <div class="hero-tech-badges" id="heroTechBadges">
+                            <!-- Tech badges will be injected here -->
+                        </div>
+
+                        <div class="hero-actions">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="btn-primary" id="heroGithubBtn">
+                                <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                                </svg>
+                                View Repository
+                            </a>
+                            <a href="#" class="btn-secondary" id="heroDownloadReportBtn">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="12" y1="19" x2="12" y2="5"></line>
+                                    <line x1="9" y1="16" x2="15" y2="16"></line>
+                                </svg>
+                                Download Report
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="hero-image-container">
+                        <img
+                            src=""
+                            alt="Project Dashboard"
+                            class="hero-image"
+                            id="heroProjectImage"
+                            loading="eager"
+                        >
+                        <button class="image-expand-btn" id="expandHeroImage" aria-label="Expand image">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Project Overview -->
+            <section class="project-overview">
+                <div class="container">
+                    <div class="overview-grid" id="overviewGrid">
+                        <div class="overview-item">
+                            <h3 class="overview-title">Business Problem</h3>
+                            <p class="overview-text" id="overviewBusinessProblem"></p>
+                        </div>
+
+                        <div class="overview-item">
+                            <h3 class="overview-title">Objectives</h3>
+                            <ul class="overview-list" id="overviewObjectives">
+                                <!-- Objectives will be injected here -->
+                            </ul>
+                        </div>
+
+                        <div class="overview-item">
+                            <h3 class="overview-title">Dataset</h3>
+                            <p class="overview-text" id="overviewDataset">
+                                <!-- Dataset details will be injected here -->
+                            </p>
+                        </div>
+
+                        <div class="overview-item">
+                            <h3 class="overview-title">Tools & Technologies</h3>
+                            <div class="tools-list" id="overviewTools">
+                                <!-- Tools will be injected here -->
+                            </div>
+                        </div>
+
+                        <div class="overview-item full-width">
+                            <h3 class="overview-title">Methodology</h3>
+                            <p class="overview-text" id="overviewMethodology"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Preview -->
+            <section class="dashboard-preview-section">
+                <div class="container">
+                    <h2 class="section-title">Dashboard Preview</h2>
+                    <p class="section-subtitle">Click the image to explore the full interactive dashboard</p>
+
+                    <div class="dashboard-preview-container">
+                        <img
+                            src=""
+                            alt="Project Dashboard - Full Preview"
+                            class="dashboard-preview-image"
+                            id="dashboardPreviewImageElement"
+                        >
+                        <button class="preview-expand-overlay" id="expandPreviewImage" aria-label="Expand dashboard preview">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Insights -->
+            <section class="key-insights">
+                <div class="container">
+                    <h2 class="section-title">Key Insights & Metrics</h2>
+
+                    <div class="insights-grid" id="insightsGrid">
+                        <!-- KPI cards will be injected here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technical Workflow -->
+            <section class="technical-workflow">
+                <div class="container">
+                    <h2 class="section-title">Technical Workflow</h2>
+                    <p class="section-subtitle">A rigorous four-stage methodology from raw data to insights</p>
+
+                    <div class="workflow-timeline" id="workflowTimeline">
+                        <!-- Workflow stages will be injected here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technologies Used -->
+            <section class="technologies-section">
+                <div class="container">
+                    <h2 class="section-title">Technologies & Tools</h2>
+
+                    <div class="tech-grid" id="techStackGrid">
+                        <!-- Tech stack will be injected here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Business Impact -->
+            <section class="business-impact">
+                <div class="container">
+                    <h2 class="section-title">Business Impact</h2>
+
+                    <div class="impact-content">
+                        <div class="impact-text">
+                            <h3 class="impact-subtitle" id="impactSubtitle"></h3>
+                            <p id="impactDescription"></p>
+                            <ul class="impact-list" id="impactOutcomes">
+                                <!-- Impact outcomes will be injected here -->
+                            </ul>
+                        </div>
+
+                        <div class="impact-metrics" id="impactMetrics">
+                            <!-- Impact metrics will be injected here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GitHub Section -->
+            <section class="github-section">
+                <div class="container">
+                    <div class="github-card">
+                        <div class="github-icon">
+                            <svg width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                        </div>
+
+                        <div class="github-content">
+                            <h3 class="github-title">Explore the Repository</h3>
+                            <p class="github-description" id="githubRepoDescription"></p>
+
+                            <div class="github-meta">
+                                <span class="github-stat">
+                                    <strong>Language:</strong> <span id="githubRepoLanguage"></span>
+                                </span>
+                                <span class="github-stat">
+                                    <strong>Status:</strong> <span id="githubRepoStatus"></span>
+                                </span>
+                            </div>
+
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="btn-primary" id="githubRepoLink">
+                                View on GitHub →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Related Projects -->
+            <section class="related-projects">
+                <div class="container">
+                    <h2 class="section-title">Other Featured Projects</h2>
+                    <p class="section-subtitle">Explore more analytics work and case studies</p>
+
+                    <div class="related-grid" id="relatedProjectsGrid">
+                        <!-- Related projects will be injected here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call To Action -->
+            <section class="project-cta">
+                <div class="container">
+                    <h2 class="cta-title">Ready to Explore More?</h2>
+                    <p class="cta-description">
+                        Check out the full project gallery or download my resume to learn more about my analytics expertise.
+                    </p>
+
+                    <div class="cta-buttons">
+                        <a href="projects.html" class="btn-primary">Back to Projects</a>
+                        <a href="#" class="btn-secondary" download>Download Resume</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Image Modal (for expanded dashboard view) -->
+    <div class="modal" id="imageModal">
+        <div class="modal-overlay" id="imageModalOverlay"></div>
+
+        <div class="modal-content image-modal-content">
+            <button class="modal-close" id="imageModalClose" aria-label="Close modal">×</button>
+
+            <div class="modal-body image-modal-body">
+                <img id="imageModalImage" src="" alt="Expanded dashboard view">
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer (Reused) -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Yash Mahajan</h3>
+                    <p>Data Analytics & Business Intelligence Specialist</p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Navigation</h4>
+                        <ul>
+                            <li><a href="index.html#home">Home</a></li>
+                            <li><a href="projects.html">Projects</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="https://github.com/yashmahajan11234567" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                            <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                            <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                            <li><a href="mailto:email@example.com">Email</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Yash Mahajan. All rights reserved.</p>
+                <p>Built with HTML, CSS & Vanilla JavaScript • Deployed on GitHub Pages</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="js/projects.js"></script>
+</body>
+</html>

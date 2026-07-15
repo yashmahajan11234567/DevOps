@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Yash Mahajan - Get in touch for data analytics projects, collaborations, or inquiries. Includes contact form and FAQ.">
+    <meta name="keywords" content="Yash Mahajan, Contact, Data Analyst, Business Inquiry, Collaboration, Feedback, FAQ, Portfolio">
+    <meta name="author" content="Yash Mahajan">
+    <title>Contact | Yash Mahajan</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <!-- Navigation Bar (Reused) -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <h1 class="brand-name">Yash Mahajan</h1>
+                <p class="brand-subtitle">Data Analytics</p>
+            </div>
+
+            <div class="navbar-menu" id="navMenu">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link active">Contact</a>
+            </div>
+
+            <button class="hamburger" id="hamburgerBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <a href="#" class="btn-primary nav-cta" download>Download Resume</a>
+        </div>
+    </nav>
+
+    <main id="main">
+        <!-- Hero Section -->
+        <section class="hero-section contact-hero">
+            <div class="container text-center">
+                <h1 class="hero-title">Get in Touch</h1>
+                <p class="hero-subtitle">I'm always open to new opportunities, collaborations, and conversations.</p>
+                <p class="hero-description">
+                    Whether you have a project idea, a question, or just want to connect, feel free to reach out.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Information -->
+        <section class="contact-info-section section-padding bg-off-white">
+            <div class="container">
+                <h2 class="section-title">Find Me Here</h2>
+                <div class="contact-info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                        </div>
+                        <h3 class="info-title">GitHub</h3>
+                        <p class="info-text"><a href="https://github.com/yashmahajan11234567" target="_blank" rel="noopener noreferrer">yashmahajan11234567</a></p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="info-title">Email</h3>
+                        <p class="info-text"><a href="mailto:yash.mahajan.data@example.com">yash.mahajan.data@example.com</a></p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <h3 class="info-title">Location</h3>
+                        <p class="info-text">New York, NY</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Contact Form -->
+        <section class="contact-form-section section-padding">
+            <div class="container">
+                <h2 class="section-title">Send Me a Message</h2>
+                <form id="contactForm" class="contact-form" novalidate>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required aria-required="true">
+                        <div class="error-message" id="nameError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required aria-required="true">
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required aria-required="true">
+                        <div class="error-message" id="subjectError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="6" required aria-required="true"></textarea>
+                        <div class="error-message" id="messageError"></div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </div>
+                    <div class="form-status-message success-message" id="formSuccess" style="display: none;">
+                        Thank you for your message! I will get back to you shortly.
+                    </div>
+                    <div class="form-status-message error-message" id="formError" style="display: none;">
+                        Oops! Something went wrong. Please try again later or contact me directly.
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section section-padding bg-off-white">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
+                            What kind of projects do you typically work on?
+                        </button>
+                        <div class="faq-answer" id="faq-answer-1" hidden>
+                            <p>I specialize in data analytics and business intelligence projects, including dashboard development, predictive modeling, sales forecasting, customer segmentation, and operational efficiency analysis. My expertise spans various industries like finance, retail, and healthcare.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
+                            What tools and technologies are you proficient in?
+                        </button>
+                        <div class="faq-answer" id="faq-answer-2" hidden>
+                            <p>My primary tools include SQL (PostgreSQL, MySQL), Python (Pandas, NumPy, Scikit-learn), Power BI, Tableau, and Excel. I also have experience with cloud platforms like AWS S3 and Azure Data Lake for data engineering tasks.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
+                            Are you available for freelance work or new collaborations?
+                        </button>
+                        <div class="faq-answer" id="faq-answer-3" hidden>
+                            <p>Yes, I am always open to discussing new opportunities and collaborations. Please use the contact form or email me directly with details about your project or proposal.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
+                            How can I view your full portfolio?
+                        </button>
+                        <div class="faq-answer" id="faq-answer-4" hidden>
+                            <p>You can view my complete project gallery on the <a href="projects.html">Projects page</a>, where you'll find detailed case studies and interactive dashboards.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call To Action -->
+        <section class="project-cta">
+            <div class="container">
+                <h2 class="cta-title">Ready to Start a Project?</h2>
+                <p class="cta-description">
+                    Let's discuss your data challenges and how I can help you achieve your business objectives.
+                </p>
+
+                <div class="cta-buttons">
+                    <a href="projects.html" class="btn-primary">View Projects</a>
+                    <a href="#" class="btn-secondary" download>Download Resume</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (Reused) -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Yash Mahajan</h3>
+                    <p>Data Analytics & Business Intelligence Specialist</p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Navigation</h4>
+                        <ul>
+                            <li><a href="index.html#home">Home</a></li>
+                            <li><a href="projects.html">Projects</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="https://github.com/yashmahajan11234567" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                            <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                            <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                            <li><a href="mailto:email@example.com">Email</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Yash Mahajan. All rights reserved.</p>
+                <p>Built with HTML, CSS & Vanilla JavaScript • Deployed on GitHub Pages</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

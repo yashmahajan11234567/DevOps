@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Data Analytics projects showcasing real-world dashboards, business intelligence, and machine learning applications.">
+    <meta name="keywords" content="Data Analytics, Tableau, Power BI, Python, SQL, Dashboard, Projects">
+    <meta name="author" content="Yash Mahajan">
+    <title>Projects - Yash Mahajan | Data Analytics Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar (Reused from index.html) -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <h1 class="brand-name">Yash Mahajan</h1>
+                <p class="brand-subtitle">Data Analytics</p>
+            </div>
+            
+            <div class="navbar-menu" id="navMenu">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="projects.html" class="nav-link active">Projects</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            
+            <button class="hamburger" id="hamburgerBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <a href="#" class="btn-primary nav-cta">Download Resume</a>
+        </div>
+    </nav>
+
+    <main id="projects-main">
+        <!-- Hero Section -->
+        <section class="projects-hero" id="home">
+            <div class="container">
+                <div class="hero-content fade-in">
+                    <h1 class="hero-title">Project Gallery</h1>
+                    <p class="hero-description">
+                        Showcase of real-world analytics, business intelligence, visualization and machine learning projects. 
+                        Each project demonstrates expertise in data exploration, visualization, and actionable insights.
+                    </p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="5">0</span>
+                            <span class="stat-label">Featured Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="4">0</span>
+                            <span class="stat-label">Analytics Domains</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="9">0</span>
+                            <span class="stat-label">Technologies</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search & Filter Section -->
+        <section class="projects-filters" id="filters">
+            <div class="container">
+                <div class="filter-header">
+                    <h2 class="section-title">Filter Repository</h2>
+                </div>
+
+                <div class="filter-container">
+                    <!-- Search Bar -->
+                    <div class="search-box">
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                            <circle cx="8.5" cy="8.5" r="6.5"></circle>
+                            <path d="M13 13l4 4"></path>
+                        </svg>
+                        <input 
+                            type="text" 
+                            id="projectSearch" 
+                            class="search-input" 
+                            placeholder="Search projects by name or keyword..."
+                            aria-label="Search projects"
+                        >
+                    </div>
+
+                    <!-- Category Filters -->
+                    <div class="filter-tags">
+                        <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+                        <button class="filter-btn" data-filter="sql">SQL</button>
+                        <button class="filter-btn" data-filter="python">Python</button>
+                        <button class="filter-btn" data-filter="powerbi">Power BI</button>
+                        <button class="filter-btn" data-filter="tableau">Tableau</button>
+                        <button class="filter-btn" data-filter="excel">Excel</button>
+                        <button class="filter-btn" data-filter="ml">Machine Learning</button>
+                        <button class="filter-btn" data-filter="data-engineering">Data Engineering</button>
+                        <button class="filter-btn" data-filter="github">GitHub</button>
+                    </div>
+                </div>
+
+                <div class="filter-results">
+                    <p id="resultsCount">Showing <span id="resultNumber">5</span> projects</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Grid -->
+        <section class="projects-grid-section" id="projects-section">
+            <div class="container">
+                <div class="projects-grid" id="projectsGrid">
+                    <!-- Project 1: Bluestock Fintech -->
+                    <article class="project-card" data-project="bluestock" data-filters="sql,powerbi,finance" data-keywords="bluestock fintech investor">
+                        <div class="project-image-container">
+                            <img 
+                                src="../AI_Context/Dashboard_References/Blustock-Fintech.png" 
+                                alt="Bluestock Fintech Investor Analytics Dashboard"
+                                class="project-image"
+                                loading="lazy"
+                            >
+                            <div class="image-overlay">
+                                <button class="btn-view-modal" data-project="bluestock" aria-label="View dashboard preview">
+                                    View Dashboard
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag tech-tag">Power BI</span>
+                                <span class="tag tech-tag">SQL</span>
+                                <span class="tag tech-tag">Finance</span>
+                            </div>
+
+                            <h3 class="project-title">Bluestock Fintech Investor Analytics</h3>
+
+                            <p class="project-category">Finance Analytics</p>
+
+                            <p class="project-description">
+                                Interactive investor analytics dashboard visualizing investment distribution, transaction trends, KYC verification and regional investment insights.
+                            </p>
+
+                            <div class="project-footer">
+                                <a href="https://github.com/yashmahajan11234567/Bluestock-fintech" target="_blank" rel="noopener noreferrer" class="btn-github">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                                    </svg>
+                                    GitHub
+                                </a>
+                                <button class="btn-view-modal" data-project="bluestock" class="btn-details">
+                                    View Details →
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2: Bitcoin Sentiment Analytics -->
+                    <article class="project-card" data-project="bitcoin" data-filters="python,sql,ml" data-keywords="bitcoin sentiment trader analytics">
+                        <div class="project-image-container">
+                            <img 
+                                src="../AI_Context/Dashboard_References/Bitcoin-sentiment.png" 
+                                alt="Bitcoin Sentiment & Trader Performance Analytics"
+                                class="project-image"
+                                loading="lazy"
+                            >
+                            <div class="image-overlay">
+                                <button class="btn-view-modal" data-project="bitcoin" aria-label="View dashboard preview">
+                                    View Dashboard
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag tech-tag">Python</span>
+                                <span class="tag tech-tag">SQL</span>
+                                <span class="tag tech-tag">Machine Learning</span>
+                            </div>
+
+                            <h3 class="project-title">Bitcoin Sentiment & Trader Analytics</h3>
+
+                            <p class="project-category">Machine Learning & Analytics</p>
+
+                            <p class="project-description">
+                                Interactive analytics platform exploring relationships between Fear & Greed sentiment and trader profitability using predictive modeling.
+                            </p>
+
+                            <div class="project-footer">
+                                <a href="https://github.com/yashmahajan11234567/PRIMETradeAI" target="_blank" rel="noopener noreferrer" class="btn-github">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                                    </svg>
+                                    GitHub
+                                </a>
+                                <button class="btn-view-modal" data-project="bitcoin" class="btn-details">
+                                    View Details →
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: HR Analytics Dashboard -->
+                    <article class="project-card" data-project="hr" data-filters="tableau" data-keywords="hr analytics human resources dashboard">
+                        <div class="project-image-container">
+                            <img 
+                                src="../AI_Context/Dashboard_References/HR-Dashboard.png" 
+                                alt="HR Analytics Dashboard"
+                                class="project-image"
+                                loading="lazy"
+                            >
+                            <div class="image-overlay">
+                                <button class="btn-view-modal" data-project="hr" aria-label="View dashboard preview">
+                                    View Dashboard
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag tech-tag">Tableau</span>
+                                <span class="tag tech-tag">Business Intelligence</span>
+                            </div>
+
+                            <h3 class="project-title">HR Analytics Dashboard</h3>
+
+                            <p class="project-category">Business Intelligence</p>
+
+                            <p class="project-description">
+                                Workforce analytics dashboard measuring employee demographics, hiring trends, attrition rates and departmental performance metrics.
+                            </p>
+
+                            <div class="project-footer">
+                                <a href="https://github.com/yashmahajan11234567/Projects/tree/main/Data-Analytics-Projects/HR-Analytics-Dashboard" target="_blank" rel="noopener noreferrer" class="btn-github">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                                    </svg>
+                                    GitHub
+                                </a>
+                                <button class="btn-view-modal" data-project="hr" class="btn-details">
+                                    View Details →
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 4: COVID-19 Analysis Dashboard -->
+                    <article class="project-card" data-project="covid" data-filters="tableau,sql" data-keywords="covid-19 coronavirus pandemic analysis">
+                        <div class="project-image-container">
+                            <img 
+                                src="../AI_Context/Dashboard_References/Covid19.png" 
+                                alt="COVID-19 Global Analysis Dashboard"
+                                class="project-image"
+                                loading="lazy"
+                            >
+                            <div class="image-overlay">
+                                <button class="btn-view-modal" data-project="covid" aria-label="View dashboard preview">
+                                    View Dashboard
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag tech-tag">Tableau</span>
+                                <span class="tag tech-tag">SQL</span>
+                            </div>
+
+                            <h3 class="project-title">COVID-19 Analysis Dashboard</h3>
+
+                            <p class="project-category">Data Visualization & Analytics</p>
+
+                            <p class="project-description">
+                                Global COVID analytics dashboard visualizing deaths, population statistics and geographical trends across continents and time periods.
+                            </p>
+
+                            <div class="project-footer">
+                                <a href="https://github.com/yashmahajan11234567/Projects/tree/main/Data-Analytics-Projects/COVID-19-Analysis" target="_blank" rel="noopener noreferrer" class="btn-github">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                                    </svg>
+                                    GitHub
+                                </a>
+                                <button class="btn-view-modal" data-project="covid" class="btn-details">
+                                    View Details →
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 5: Bike Sales Analysis -->
+                    <article class="project-card" data-project="bikes" data-filters="excel" data-keywords="bike sales customer analysis">
+                        <div class="project-image-container">
+                            <img 
+                                src="../AI_Context/Dashboard_References/Bikes-Sales.png" 
+                                alt="Bike Sales Analysis Dashboard"
+                                class="project-image"
+                                loading="lazy"
+                            >
+                            <div class="image-overlay">
+                                <button class="btn-view-modal" data-project="bikes" aria-label="View dashboard preview">
+                                    View Dashboard
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag tech-tag">Excel</span>
+                                <span class="tag tech-tag">Analytics</span>
+                            </div>
+
+                            <h3 class="project-title">Bike Sales Analysis Dashboard</h3>
+
+                            <p class="project-category">Customer Analytics</p>
+
+                            <p class="project-description">
+                                Customer purchasing behavior analysis using demographics, commute distance, income levels and purchasing patterns.
+                            </p>
+
+                            <div class="project-footer">
+                                <a href="https://github.com/yashmahajan11234567/Projects/tree/main/Data-Analytics-Projects/Bike-Sales-Analysis" target="_blank" rel="noopener noreferrer" class="btn-github">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                                    </svg>
+                                    GitHub
+                                </a>
+                                <button class="btn-view-modal" data-project="bikes" class="btn-details">
+                                    View Details →
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- No Results Message -->
+                <div id="noResults" class="no-results" style="display: none;">
+                    <p>No projects match your search criteria. Try adjusting your filters.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="projects-stats" id="stats-section">
+            <div class="container">
+                <h2 class="section-title">Project Overview</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card" data-stat="projects">
+                        <div class="stat-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                        </div>
+                        <div class="stat-details">
+                            <p class="stat-count" data-target="5">5</p>
+                            <p class="stat-text">Projects Delivered</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" data-stat="dashboards">
+                        <div class="stat-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="2" x2="12" y2="22"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                        <div class="stat-details">
+                            <p class="stat-count" data-target="5">5</p>
+                            <p class="stat-text">Interactive Dashboards</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" data-stat="domains">
+                        <div class="stat-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 6v12M6 12h12"></path>
+                            </svg>
+                        </div>
+                        <div class="stat-details">
+                            <p class="stat-count" data-target="4">4</p>
+                            <p class="stat-text">Business Domains</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" data-stat="tech">
+                        <div class="stat-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"></polyline>
+                                <line x1="12" y1="12" x2="20" y2="7.5"></line>
+                                <line x1="12" y1="12" x2="12" y2="21"></line>
+                                <line x1="12" y1="12" x2="4" y2="7.5"></line>
+                            </svg>
+                        </div>
+                        <div class="stat-details">
+                            <p class="stat-count" data-target="9">9</p>
+                            <p class="stat-text">Technologies Used</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call To Action Section -->
+        <section class="projects-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">Interested in Collaborating?</h2>
+                    <p class="cta-description">
+                        Let's work together on your next data analytics project. 
+                        Download my resume to learn more about my experience and expertise.
+                    </p>
+                    
+                    <div class="cta-buttons">
+                        <a href="#" class="btn-primary">Download Resume</a>
+                        <a href="#" class="btn-secondary">Contact Me</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Dashboard Preview Modal (Reused from Home Page) -->
+    <div class="modal" id="dashboardModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Close modal">×</button>
+            
+            <div class="modal-header">
+                <h2 id="modalTitle">Dashboard Title</h2>
+                <p id="modalSubtitle">Dashboard subtitle</p>
+            </div>
+
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Dashboard preview">
+            </div>
+
+            <div class="modal-footer">
+                <a id="modalGithubBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-github">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    GitHub
+                </a>
+                <button class="btn-primary" onclick="window.open(document.getElementById('modalGithubBtn').href)">
+                    Explore Project
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer (Reused from Home Page) -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Yash Mahajan</h3>
+                    <p>Data Analytics & Business Intelligence Specialist</p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Navigation</h4>
+                        <ul>
+                            <li><a href="index.html#home">Home</a></li>
+                            <li><a href="projects.html">Projects</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="https://github.com/yashmahajan11234567" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                            <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                            <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                            <li><a href="mailto:email@example.com">Email</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Yash Mahajan. All rights reserved.</p>
+                <p>Built with HTML, CSS & Vanilla JavaScript • Deployed on GitHub Pages</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
