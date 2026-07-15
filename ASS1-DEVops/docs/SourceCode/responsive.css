@@ -1,0 +1,266 @@
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Desktop: 1024px and up - Base styles already defined in style.css */
+
+/* Laptop: 1024px - Already handled by @media (max-width: 1024px) in style.css */
+
+/* Tablet: 768px - Already handled by @media (max-width: 768px) in style.css */
+
+/* Mobile: 480px - Already handled by @media (max-width: 480px) in style.css */
+
+/* Landscape orientation (for tablets and mobile) */
+@media (max-height: 480px) and (orientation: landscape) {
+    /* Adjust padding for landscape mobile */
+    .container {
+        padding: 0 var(--spacing-lg);
+    }
+
+    /* Adjust hero sections */
+    .hero-section {
+        padding: var(--spacing-lg) 0;
+    }
+
+    .about-hero, .contact-hero {
+        padding: var(--spacing-lg) 0;
+    }
+
+    /* Adjust timeline layout for landscape */
+    .timeline-container::after {
+        left: 40px;
+    }
+
+    .timeline-item {
+        padding-left: 80px;
+        padding-right: var(--spacing-md);
+    }
+
+    @media (max-width: 768px) {
+        .timeline-container::after {
+            left: 40px;
+        }
+    }
+
+    /* Compact grid layouts */
+    .skills-grid,
+    .certifications-grid,
+    .achievements-grid,
+    .github-highlights-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Large Monitor: 1440px and up */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    /* Increase spacing for large screens */
+    .section-padding {
+        padding: calc(var(--spacing-3xl) * 1.5) 0;
+    }
+
+    /* Larger typography for impact */
+    .section-title {
+        font-size: clamp(2rem, 6vw, 2.5rem);
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+    }
+
+    .project-title {
+        font-size: clamp(2.5rem, 6vw, 3rem);
+    }
+
+    /* Wider content areas */
+    .impact-content {
+        grid-template-columns: 1fr 1fr;
+        gap: calc(var(--spacing-3xl) * 1.5);
+    }
+
+    /* Enhanced hover effects */
+    .skill-card:hover,
+    .timeline-card:hover,
+    .experience-card:hover,
+    .achievement-card:hover,
+    .info-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-card:hover,
+    .cert-card:hover,
+    .tech-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Extra Large Monitor: 1920px and up */
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1600px;
+    }
+
+    /* Maximum spacing */
+    .section-padding {
+        padding: calc(var(--spacing-3xl) * 2) 0;
+    }
+
+    /* Ultra-wide layouts for specific sections */
+    .professional-timeline-section {
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+
+    .timeline-container {
+        max-width: 1400px;
+    }
+
+    /* Enhanced content widths */
+    .summary-content,
+    .faq-container {
+        max-width: 1000px;
+    }
+}
+
+/* Print styles */
+@media print {
+    /* Hide interactive elements */
+    .hamburger,
+    .nav-cta,
+    .btn-primary,
+    .btn-secondary,
+    .btn-link,
+    .btn-tertiary,
+    .image-expand-btn,
+    .preview-expand-overlay,
+    .faq-question::after,
+    .modal,
+    .modal-overlay {
+        display: none !important;
+    }
+
+    /* Adjust layout for print */
+    .navbar {
+        position: static;
+        box-shadow: none;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+    /* Ensure content flows naturally */
+    section {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    /* Remove backgrounds for cleaner print */
+    .bg-off-white,
+    .about-hero,
+    .contact-hero,
+    .projects-hero {
+        background: var(--color-white) !important;
+    }
+
+    /* Reset colors for print */
+    body {
+        color: #000;
+        background: #fff;
+    }
+
+    h1, h2, h3, .section-title {
+        color: #000;
+    }
+
+    /* Ensure links are visible */
+    a {
+        color: #0066cc;
+        text-decoration: underline;
+    }
+
+    /* Hide footer background */
+    .footer {
+        background: #fff !important;
+        color: #000 !important;
+        border-top: 1px solid #ccc;
+    }
+
+    .footer-section a {
+        color: #0066cc;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Enhance image quality for retina displays */
+    .dashboard-image img,
+    .project-image,
+    .related-image,
+    .hero-image,
+    .info-icon svg {
+        image-rendering: -webkit-optimize-contrast;
+    }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+
+    /* Keep essential transitions but make them instant */
+    .btn-primary,
+    .btn-secondary,
+    .btn-link,
+    .btn-tertiary,
+    .nav-link,
+    .faq-question,
+    .filter-btn,
+    .skill-card,
+    .timeline-card,
+    .experience-card,
+    .achievement-card,
+    .info-card,
+    .project-card,
+    .cert-card,
+    .tech-card,
+    .workflow-card,
+    .insight-card,
+    .metric-card {
+        transition: none !important;
+    }
+
+    /* Keep hover states but remove animation */
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .btn-link:hover,
+    .btn-tertiary:hover,
+    .nav-link:hover,
+    .faq-question:hover,
+    .filter-btn:hover,
+    .skill-card:hover,
+    .timeline-card:hover,
+    .experience-card:hover,
+    .achievement-card:hover,
+    .info-card:hover,
+    .project-card:hover,
+    .cert-card:hover,
+    .tech-card:hover,
+    .workflow-card:hover,
+    .insight-card:hover,
+    .metric-card:hover {
+        transition: none !important;
+    }
+}
